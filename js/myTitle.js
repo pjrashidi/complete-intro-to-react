@@ -6,10 +6,13 @@ var div = React.DOM.div
 
 var MyTitle = React.createClass({
   render: function () {
+    const style = {color: this.props.color}
     return (
-      div(null,
-        h1({ style: { color: this.props.color, fontWeight: '100' } }, this.props.anyTitle)
-      )
+      <div>
+        <h1 style= { style }>
+          {this.props.anyTitle}
+        </h1>
+      </div>
     )
   }
 })
