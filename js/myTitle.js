@@ -9,7 +9,7 @@ var MyTitle = React.createClass({
     return (
       <div>
         <h1 style= { style }>
-          {this.props.anyTitle}
+          {this.props.title}
         </h1>
       </div>
     )
