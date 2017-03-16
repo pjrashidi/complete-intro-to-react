@@ -1,8 +1,5 @@
 import React from 'react'
 
-
-var h1 = React.DOM.h1
-
 var MyTitle = React.createClass({
   render: function () {
     const style = {color: this.props.color}
