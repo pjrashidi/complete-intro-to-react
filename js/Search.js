@@ -8,11 +8,7 @@ const Search = React.createClass({
       <div className='search'>
         {preload.shows.map((show) => {
           return (
-            <ShowCard
-              poster={show.poster}
-              title={show.title}
-              year={show.year}
-              description={show.description} />
+            <ShowCard key={show.imdbID} show={show} />
           )
         })}
       </div>
