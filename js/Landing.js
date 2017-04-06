@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {setSearchTerm} from './actionCreators'
+import { setSearchTerm } from './actionCreators'
 import { Link } from 'react-router'
 const { string, func } = React.PropTypes
 
@@ -10,7 +10,7 @@ const Landing = React.createClass({
     dispatch: func
   },
   handleSearchTermChange (event) {
-    this.props.dispatch(SetSearchTerm(event.target.value))
+    this.props.dispatch(setSearchTerm(event.target.value))
   },
   render () {
     return (
