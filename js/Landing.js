@@ -2,12 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { setSearchTerm } from './actionCreators'
 import { Link } from 'react-router'
-const { string, func } = React.PropTypes
+const { string, func, object } = React.PropTypes
 
 const Landing = React.createClass({
+  contextTypes: {
+    router: object
+  },
   propTypes: {
     searchTerm: string,
     dispatch: func
+  },
+  handleSearchSubmit (event) {
+    event.preventDefault()
+    this.context.router.transitionTo('/search')
   },
   handleSearchTermChange (event) {
     this.props.dispatch(setSearchTerm(event.target.value))
@@ -16,7 +23,9 @@ const Landing = React.createClass({
     return (
       <div className='landing'>
         <h1>svideo</h1>
-        <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
+        <form onSubmit={this.handleSearchSubmit}>
+          <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
+        </form>
         <Link to='/search'>or Browse All</Link>
       </div>
     )
