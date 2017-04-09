@@ -1,7 +1,8 @@
 import { SET_SEARCH_TERM } from './actions'
 
 const DEFAULT_STATE = {
-  searchTerm: ''
+  searchTerm: '',
+  omdbData: {}
 }
 
 const setSearchTerm = (state, action) => {
