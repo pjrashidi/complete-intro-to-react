@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { getOMDBData } from './actionCreators'
 import Header from './Header'
-const {shape, string} = React.PropTypes
+const {shape, string, object, func} = React.PropTypes
 
 const Details = React.createClass({
   propTypes: {
@@ -12,7 +14,9 @@ const Details = React.createClass({
       trailer: string,
       description: string,
       imdbID: string
-    })
+    }),
+    omdbData: object,
+    dispatch: func
   },
   getInitialState () {
     return {
@@ -20,6 +24,7 @@ const Details = React.createClass({
     }
   },
   componentDidMount () {
+    this.props.dispatch(getOMDBData('placeholder'))
     axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
       .then((response) => {
         this.setState({omdbData: response.data})
@@ -52,4 +57,8 @@ const Details = React.createClass({
   }
 })
 
-export default Details
+const mapStateToProps = (state) => {
+  return { omdbData: state.omdbData }
+}
+
+export default connect(mapStateToProps)(Details)
