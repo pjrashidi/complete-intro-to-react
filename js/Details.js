@@ -18,24 +18,14 @@ const Details = React.createClass({
     omdbData: object,
     dispatch: func
   },
-  getInitialState () {
-    return {
-      omdbData: {}
-    }
-  },
   componentDidMount () {
     this.props.dispatch(getOMDBData(this.props.show.imdbID))
-    axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
-      .then((response) => {
-        this.setState({omdbData: response.data})
-      })
-      .catch((error) => console.error('axios error', error))
   },
   render () {
     const { poster, title, year, trailer, description } = this.props.show
     let rating
-    if (this.state.omdbData.imdbRating) {
-      rating = <h3>{this.state.omdbData.imdbRating}</h3>
+    if (this.props.omdbData.imdbRating) {
+      rating = <h3>{this.props.omdbData.imdbRating}</h3>
     } else {
       rating = <img src='../public/img/loading.png' alt='loading indicator' />
     }
