@@ -24,7 +24,7 @@ const Details = React.createClass({
     }
   },
   componentDidMount () {
-    this.props.dispatch(getOMDBData('placeholder'))
+    this.props.dispatch(getOMDBData(this.props.show.imdbID))
     axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
       .then((response) => {
         this.setState({omdbData: response.data})
