@@ -18,7 +18,9 @@ const Details = React.createClass({
     dispatch: func
   },
   componentDidMount () {
-    this.props.dispatch(getOMDBData(this.props.show.imdbID))
+    if (!this.props.omdbData.imdbRating) {
+      this.props.dispatch(getOMDBData(this.props.show.imdbID))
+    }
   },
   render () {
     const { poster, title, year, trailer, description } = this.props.show
@@ -46,8 +48,11 @@ const Details = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => {
-  return { omdbData: state.omdbData }
+const mapStateToProps = (state, ownProps) => {
+  var omdbData = state.omdbData[ownProps.show.imdbID] || {}
+  return {
+    omdbData: omdbData
+  }
 }
 
 export default connect(mapStateToProps)(Details)
