@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getOMDBData } from './actionCreators'
 import Header from './Header'
-const {shape, string, object, func} = React.PropTypes
+const {shape, string, func} = React.PropTypes
 
 const Details = React.createClass({
   propTypes: {
@@ -14,7 +14,9 @@ const Details = React.createClass({
       description: string,
       imdbID: string
     }),
-    omdbData: object,
+    omdbData: shape({
+      imdbRating: string
+    }),
     dispatch: func
   },
   componentDidMount () {
