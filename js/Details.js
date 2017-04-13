@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getOMDBData } from './actionCreators'
 import Header from './Header'
-const { shape, string, object, func } = React.PropTypes
+const {shape, string, func} = React.PropTypes
 
 const Details = React.createClass({
   propTypes: {
@@ -14,17 +14,15 @@ const Details = React.createClass({
       description: string,
       imdbID: string
     }),
-    omdbData: object,
+    omdbData: shape({
+      imdbRating: string
+    }),
     dispatch: func
   },
   componentDidMount () {
-    console.log('componentDidMount');
-    this.props.dispatch(getOMDBData(this.props.show.imdbID))
-    // axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
-    //   .then((response) => {
-    //     this.setState({omdbData: response.data})
-    //   })
-    //   .catch((error) => console.error('axios error', error))
+    if (!this.props.omdbData.imdbRating) {
+      this.props.dispatch(getOMDBData(this.props.show.imdbID))
+    }
   },
   render () {
     const { poster, title, year, trailer, description } = this.props.show
@@ -52,9 +50,10 @@ const Details = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  var omdbData = state.omdbData[ownProps.show.imdbID] || {}
   return {
-    omdbData: state.omdbData
+    omdbData: omdbData
   }
 }
 
