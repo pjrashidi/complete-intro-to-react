@@ -18,20 +18,3 @@ export function getOMDBData (imdbID) {
       .catch((error) => console.error('axios error', error))
   }
 }
-
-export function setOMDBData (omdbData) {
-  console.log('setOMDBData')
-  return { type: SET_OMDB_DATA, omdbDATA: omdbData }
-}
-
-export function getOMDBData (imdbID) {
-  console.log('getOMDBData')
-  return dispatch => {
-  axios.get(`http://www.omdbapi.com/?i=${imdbID}`)
-    .then((response) => {
-      dispatch(setOMDBData(response.data))
-      // this.setState({omdbData: response.data})
-    })
-    .catch((error) => console.error('axios error', error))
-  }
-}
