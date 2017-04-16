@@ -21,7 +21,7 @@ test('Search should render a ShowCard for each show', () => {
 })
 
 test('Search should render correct number of shows based on search', () => {
-  const searchWord = "house"
+  const searchWord = 'house'
   store.dispatch(setSearchTerm(searchWord))
   const component = render(<Provider store={store}><Search shows={preload.shows} /></Provider>)
   const ShowCount = preload.shows.filter((show) => `${show.title} ${show.description}`.toUpperCase().indexOf(searchWord.toUpperCase()) >= 0).length
