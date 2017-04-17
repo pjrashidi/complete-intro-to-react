@@ -65,4 +65,4 @@ server.use((req, res) => {
 
 console.log('listening on port', PORT)
 server.listen(PORT)
-//no explanation
+//from express.js docs: Starts a UNIX socket and listens for connections on the given path
