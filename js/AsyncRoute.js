@@ -13,7 +13,7 @@ const AsyncRoute = React.createClass({
   },
   componentDidMount () {
     this.props.loadingPromise.then((module) => {
-      this.component = module
+      this.component = module.default
       this.setState({loaded: true})
     })
   },
